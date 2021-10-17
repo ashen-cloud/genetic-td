@@ -1,0 +1,8 @@
+{
+  "name": "genetic-td",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:ashen-cloud/genetic-td.git",
+  "author": "Dan <serendipitypwnz@gmail.com>",
+  "license": "MIT"
+}

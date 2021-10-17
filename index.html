@@ -1,0 +1,58 @@
+<style>
+  body {
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: #f0f0f0;
+  }
+</style>
+
+<script src="https://unpkg.com/konva@8.2.2/konva.min.js"></script>
+
+<body>
+    <div id="container"></div>
+    <script>
+      function draw() {
+        let width = window.innerWidth
+        let height = window.innerHeight
+
+        let stage = new Konva.Stage({
+          container: 'container',
+          width: width,
+          height: height,
+        })
+
+        console.log(stage)
+
+        let layer = new Konva.Layer()
+        let rectX = stage.width() / 2 - 50
+        let rectY = stage.height() / 2 - 25
+
+        let box = new Konva.Rect({
+          x: rectX,
+          y: rectY,
+          width: 100,
+          height: 50,
+          fill: '#00D2FF',
+          stroke: 'black',
+          strokeWidth: 4,
+          draggable: true,
+        })
+
+        // add cursor styling
+        box.on('mouseover', function () {
+          document.body.style.cursor = 'pointer'
+        })
+        box.on('mouseout', function () {
+          document.body.style.cursor = 'default'
+        })
+
+        layer.add(box)
+        stage.add(layer)
+      }
+
+      draw()
+      // setInterval(draw, 1000)
+    </script>
+</body>
+
