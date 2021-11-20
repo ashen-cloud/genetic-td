@@ -1,0 +1,99 @@
+<style>
+  body {
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: #f0f0f0;
+  }
+</style>
+
+<script src="https://unpkg.com/konva@8.3.0/konva.min.js"></script>
+
+<body>
+    <div id="container"></div>
+    <script>
+      /*
+        TODO:
+        1. Re-render stage
+        2. Enemies, their movement
+        3. Collision
+        4. Drag and drop obstacles
+        5. Interaction with obstacles of different kind
+      */
+
+      let width = window.innerWidth
+      let height = window.innerHeight
+
+      let stage = new Konva.Stage({
+        container: 'container',
+        width: width,
+        height: height,
+      })
+
+      console.log(stage)
+
+      let layer = new Konva.Layer()
+
+      function createCircles(n) {
+        const circles = []
+        
+        let startX = 20
+        let startY = 30
+
+        for (let i = 0; i < n; i++) {
+          let circle = new Konva.Circle({
+            x: 20,
+            y: 20,
+            radius: 10,
+            fill: 'blue', // TODO
+            strokeWidth: 0,
+          })
+
+          layer.add(circle)
+          stage.add(layer)
+
+          circles.push({ i, o: circle })
+        }
+
+        return circles
+      }
+
+      const circles = createCircles(2)
+
+      const moves = [
+        { i: 0, direction: 'down' },
+        { i: 1, direction: 'downright' },
+      ]
+
+      function move(circles, moves) {
+        for (const move of moves) {
+          const c = circles.find(x => x.i === move.i)
+          if (move.direction === 'down') {
+            c.o.position({ x: c.o.attrs.x, y: c.o.attrs.y + 3 })
+          } else if (move.direction === 'downright') {
+            c.o.position({ x: c.o.attrs.x + 3, y: c.o.attrs.y + 3 })
+          }
+        }
+      }
+
+      
+      setInterval(move, 500, circles, moves)
+
+
+      // ---------------- JUNK ------------------
+      /*
+
+        box.on('mouseover', function () {
+          document.body.style.cursor = 'pointer'
+        })
+
+        box.on('mouseout', function () {
+          state.rectX = box.attrs.x
+          state.rectY = box.attrs.y
+          document.body.style.cursor = 'default'
+        })
+       
+      */
+    </script>
+</body>
+
