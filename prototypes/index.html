@@ -58,11 +58,17 @@
         return circles
       }
 
-      const circles = createCircles(2)
+      const circles = createCircles(8)
 
-      const moves = [
+      const moves = [ // Testing
         { i: 0, direction: 'down' },
-        { i: 1, direction: 'downright' },
+        { i: 1, direction: 'up' },
+        { i: 2, direction: 'left' },
+        { i: 3, direction: 'right' },
+        { i: 4, direction: 'downleft' },
+        { i: 5, direction: 'downright' },
+        { i: 6, direction: 'upleft' },
+        { i: 7, direction: 'upright' },
       ]
 
       function move(circles, moves) {
@@ -72,6 +78,18 @@
             c.o.position({ x: c.o.attrs.x, y: c.o.attrs.y + 3 })
           } else if (move.direction === 'downright') {
             c.o.position({ x: c.o.attrs.x + 3, y: c.o.attrs.y + 3 })
+          } else if (move.direction === 'up') {
+            c.o.position({ x: c.o.attrs.x, y: c.o.attrs.y - 3 })
+          } else if (move.direction === 'downleft') {
+            c.o.position({ x: c.o.attrs.x - 3, y: c.o.attrs.y + 3 })
+          } else if (move.direction === 'right') {
+            c.o.position({ x: c.o.attrs.x + 3, y: c.o.attrs.y })
+          } else if (move.direction === 'left') {
+            c.o.position({ x: c.o.attrs.x - 3, y: c.o.attrs.y })
+          } else if (move.direction === 'upright') {
+            c.o.position({ x: c.o.attrs.x + 3, y: c.o.attrs.y - 3 })
+          } else if (move.direction === 'upleft') {
+            c.o.position({ x: c.o.attrs.x - 3, y: c.o.attrs.y - 3 })
           }
         }
       }
