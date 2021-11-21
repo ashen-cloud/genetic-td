@@ -14,8 +14,9 @@
     <script>
       /*
         TODO:
-        collision
+        user structures
         vison
+        hp
       */
 
       const width = window.innerWidth
@@ -39,6 +40,26 @@
 
       layer.add(line)
       stage.add(layer)
+
+      const wall = new Konva.Rect({
+        x: 50,
+        y: 1130,
+        width: 20,
+        height: 100,
+        fill: 'green',
+        stroke: 'black',
+        strokeWidth: 1,
+        draggable: true
+      })
+
+      // wall.on('mouseout', _ => {
+      //   document.body.style.cursor = 'default'
+      // })
+
+      const wallLayer = new Konva.Layer()
+
+      wallLayer.add(wall)
+      stage.add(wallLayer)
 
       const obstacles = []
 
@@ -112,15 +133,8 @@
               // edges
               if (x <= 0 || y <= 0 || y >= 1100 || x >= window.innerWidth) return 1
 
-              if (move.direction === 'right') {
-                console.log('new', newX, newY)
-                console.log('obst', obstacles)
-              }
-
               // walls
-              if (obstacles.find(o => ))) return 1 // TODO
-
-
+              if (wallLayer.getIntersection({ x: newX, y: newY })) return 1
             }
             
             if (!collision(newX, newY)) {
@@ -133,25 +147,7 @@
         setInterval(move, 1000, circles, moves)
       }
 
-      const wall = new Konva.Rect({
-        x: 50,
-        y: 1130,
-        width: 20,
-        height: 100,
-        fill: 'green',
-        stroke: 'black',
-        strokeWidth: 1,
-        draggable: true
-      })
-
-      wall.on('mouseout', _ => {
-        obstacles.pop()
-        obstacles.push({ x: [wall.attrs.x, wall.attrs.x + wall.attrs.width], y: [wall.attrs.y, wall.attrs.y + wall.attrs.height] })
-        document.body.style.cursor = 'default'
-      })
-
-      layer.add(wall)
-      stage.add(layer)
+      // TODO: user code here
 
       runGame()
 
